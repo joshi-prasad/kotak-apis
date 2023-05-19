@@ -1,0 +1,1947 @@
+openapi: 3.0.1
+info:
+  title: Orders-API
+  description: Order Placement API's
+  version: "1.1"
+servers:
+- url: https://tradeapi.kotaksecurities.com/apim/orders/1.1
+security:
+- default: []
+tags:
+- name: Normal
+  description: Details of Order for Normal Product.
+- name: Super Multiple
+  description: Details of Order for Super Multiple Product.
+- name: Smart Order Routing
+  description: Details of Order for SOR Product.
+- name: Margin Trading
+  description: Details of Order for MTF Product.
+paths:
+  /order/normal:
+    put:
+      tags:
+      - Normal
+      summary: Modify an existing order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_normal_body'
+        required: true
+      responses:
+        "200":
+          description: Order modified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    post:
+      tags:
+      - Normal
+      summary: Place a New order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID Generated with successful login.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_normal_body_1'
+        required: true
+      responses:
+        "200":
+          description: Order placed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /order/normal/{orderId}:
+    delete:
+      tags:
+      - Normal
+      summary: Cancel a Normal order
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: Order ID to cancel.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Order cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /order/supermultiple:
+    put:
+      tags:
+      - Super Multiple
+      summary: Modify an existing order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_supermultiple_body'
+        required: true
+      responses:
+        "200":
+          description: Order modified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    post:
+      tags:
+      - Super Multiple
+      summary: Place a New order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID Generated with successful login.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_supermultiple_body_1'
+        required: true
+      responses:
+        "200":
+          description: Order placed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /order/supermultiple/{orderId}:
+    delete:
+      tags:
+      - Super Multiple
+      summary: Cancel an order
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: Order ID to cancel.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Order cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /order/sor:
+    put:
+      tags:
+      - Smart Order Routing
+      summary: Modify an existing order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_sor_body'
+        required: true
+      responses:
+        "200":
+          description: Order modified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    post:
+      tags:
+      - Smart Order Routing
+      summary: Place a New order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID Generated with successful login.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_sor_body_1'
+        required: true
+      responses:
+        "200":
+          description: Order placed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /order/sor/{orderId}:
+    delete:
+      tags:
+      - Smart Order Routing
+      summary: Cancel an order
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: Order ID to cancel.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Order cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /order/mtf:
+    put:
+      tags:
+      - Margin Trading
+      summary: Modify an existing order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_mtf_body'
+        required: true
+      responses:
+        "200":
+          description: Order modified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    post:
+      tags:
+      - Margin Trading
+      summary: Place a New order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID Generated with successful login.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_mtf_body_1'
+        required: true
+      responses:
+        "200":
+          description: Order placed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /order/mtf/{orderId}:
+    delete:
+      tags:
+      - Margin Trading
+      summary: Cancel an order
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: Order ID to cancel.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Order cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /order/mis:
+    put:
+      tags:
+      - MIS
+      summary: Modify an existing order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_mis_body'
+        required: true
+      responses:
+        "200":
+          description: Order modified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    post:
+      tags:
+      - MIS
+      summary: Place a New order
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        description: Session ID Generated with successful login.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_mis_body_1'
+        required: true
+      responses:
+        "200":
+          description: Order placed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /order/mis/{orderId}:
+    delete:
+      tags:
+      - MIS
+      summary: Cancel an order
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: orderId
+        in: path
+        description: Order ID to cancel.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Order cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+components:
+  schemas:
+    fault:
+      title: Default Fault
+      type: object
+      properties:
+        code:
+          type: integer
+          description: error code
+          format: int32
+        message:
+          type: string
+          description: error message
+        description:
+          type: string
+          description: error description
+      description: Fault Details
+    sor:
+      title: SOR Response
+      type: object
+      properties:
+        price:
+          type: number
+          description: Price of the order at which order is placed
+          format: float
+        quantity:
+          type: number
+          description: Qunatity of the order placed in exchange.
+          format: float
+        mesage:
+          type: string
+          description: Order confirmation mesage
+        orderId:
+          type: integer
+          description: Order ID of the order to be modified
+          format: int64
+      description: SOR Order Details Repsonse.
+    tsloplace:
+      title: TSLO Parameters
+      type: object
+      properties:
+        spread:
+          type: number
+          description: Spread of the order
+          format: float
+        trailingPrice:
+          type: number
+          description: Triling price of TSLO Order.
+          format: float
+      description: TSLO Order parmaeter for Product TSLO
+    bracketplace:
+      title: Brakcet Order Parameters
+      type: object
+      properties:
+        Spread:
+          type: number
+          description: Spread of the order
+          format: float
+        trailingPrice:
+          type: number
+          description: Triling price of TSLO Order.
+          format: float
+        bookProfit:
+          type: number
+          description: Book Profit Price of the order
+          format: float
+        bookDisclosedQty:
+          type: integer
+          description: Quantity to be disclosed in bracket order
+          format: int32
+      description: Bracket Order parmaeter for Product Bracket
+    codplace:
+      title: Call of the Day
+      type: object
+      properties:
+        squareOffFlag:
+          type: integer
+          description: "Square off flag for COD order, 1 to auto square off order.\
+            \ 0 - for no auto Square off by system."
+          format: int32
+      description: Call of the day Order parmaeter for Product COD
+    gtcplace:
+      title: Good till Cancel Order
+      type: object
+      properties:
+        closeDate:
+          type: string
+          description: Close date for GTC order till which order to be placed in exchange
+            by system.
+      description: Order parmaeter for Product GTC
+    ctdplace:
+      title: Convert to delivery
+      type: object
+      properties:
+        ConvertQuantity:
+          type: integer
+          description: Quantity to convert to delivery
+          format: int32
+      description: Order parmaeter for Product CTD
+    tslomodify:
+      title: TSLO Parameters
+      type: object
+      properties:
+        orderIndicator:
+          type: integer
+          description: Order Indicator to modify Order
+          format: int64
+        spread:
+          type: number
+          description: Spread of the order
+          format: float
+        trailingPrice:
+          type: number
+          description: Triling price of TSLO Order.
+          format: float
+      description: TSLO Order parmaeter for Product TSLO
+    bracketmodify:
+      title: Brakcet Order Parameters
+      type: object
+      properties:
+        orderIndicator:
+          type: integer
+          description: Order Indicator to modify Order
+          format: int64
+        Spread:
+          type: number
+          description: Spread of the order
+          format: float
+        trailingPrice:
+          type: number
+          description: Triling price of TSLO Order.
+          format: float
+        bookProfit:
+          type: number
+          description: Book Profit Price of the order
+          format: float
+        bookDisclosedQty:
+          type: integer
+          description: Quantity to be disclosed in bracket order
+          format: int32
+      description: Bracket Order parmaeter for Product Bracket
+    codmodify:
+      title: Call of the Day
+      type: object
+      properties:
+        orderNo:
+          type: string
+          description: Order Number to modify
+      description: Call of the day Order parmaeter for Product COD
+    gtcmodify:
+      title: Good till Cancel Order
+      type: object
+      properties:
+        gtcOrderNo:
+          type: string
+          description: Order Number to modify
+      description: Order parmaeter for Product GTC
+    ctdmodify:
+      title: Convert to delivery
+      type: object
+      properties:
+        ConvertQuantity:
+          type: integer
+          description: Quantity to convert to delivery
+          format: int32
+      description: Order parmaeter for Product CTD
+    tslocancel:
+      title: TSLO Parameters
+      type: object
+      properties:
+        orderIndicator:
+          type: integer
+          description: Order Indicator to modify Order
+          format: int64
+      description: TSLO Order parmaeter for Product TSLO
+    bracketcancel:
+      title: Brakcet Order Parameters
+      type: object
+      properties:
+        orderIndicator:
+          type: integer
+          description: Order Indicator to modify Order
+          format: int64
+      description: Bracket Order parmaeter for Product Bracket
+    codcancel:
+      title: Call of the Day
+      type: object
+      properties:
+        orderNo:
+          type: string
+          description: Order Number to modify
+      description: Call of the day Order parmaeter for Product COD
+    gtccancel:
+      title: Good till Cancel Order
+      type: object
+      properties:
+        gtcOrderNo:
+          type: string
+          description: Order Number to modify
+      description: Order parmaeter for Product GTC
+    order_normal_body:
+      required:
+      - orderId
+      properties:
+        orderId:
+          type: string
+          description: Order ID of the order to be modified
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int32
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        disclosedQuantity:
+          type: integer
+          description: Quantity to be disclosed in order
+          format: int32
+        originalOpenQuantity:
+          type: integer
+          description: Original open quantity of order
+          format: int32
+        originalPrice:
+          type: number
+          description: Original order price input by client/user.
+          format: float
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+        validity:
+          type: string
+          description: "Validity of the order - GFD, IOC etc"
+          enum:
+          - GFD
+          - IOC
+    inline_response_200:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_Success'
+      example:
+        Success:
+          Exchange:
+            quantity: 1.4658129805029452
+            orderId: 0.8008281904610115
+            price: 6.027456183070403
+            message: message
+    inline_response_400:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: error code
+          format: int32
+        message:
+          type: string
+          description: error message
+        description:
+          type: string
+          description: error description
+    order_normal_body_1:
+      properties:
+        instrumentToken:
+          type: integer
+          description: Instrument token of the scrip to be traded
+          format: int64
+        transactionType:
+          type: string
+          description: Transaction Type - BUY or SELL
+          enum:
+          - BUY
+          - SELL
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int64
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        validity:
+          type: string
+          description: "Validity of the order - GFD, IOC etc"
+          enum:
+          - GFD
+          - IOC
+        variety:
+          type: string
+          description: "Variety of the order - REGULAR, AMO, SQUAREOFF - for Super\
+            \ Multiple Orders etc"
+          enum:
+          - REGULAR
+          - AMO
+        disclosedQuantity:
+          type: integer
+          description: Quantity to be disclosed in order
+          format: int32
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+        tag:
+          type: string
+          description: Tag for this order
+    order_supermultiple_body:
+      required:
+      - orderId
+      properties:
+        orderId:
+          type: string
+          description: Order ID of the order to be modified
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int32
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        disclosedQuantity:
+          type: integer
+          description: Quantity to be disclosed in order
+          format: int32
+        originalOpenQuantity:
+          type: integer
+          description: Original open quantity of order
+          format: int32
+        originalPrice:
+          type: number
+          description: Original order price input by client/user.
+          format: float
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+        validity:
+          type: string
+          description: "Validity of the order - GFD, IOC etc"
+          enum:
+          - GFD
+          - IOC
+    order_supermultiple_body_1:
+      properties:
+        instrumentToken:
+          type: integer
+          description: Instrument token of the scrip to be traded
+          format: int64
+        transactionType:
+          type: string
+          description: Transaction Type - BUY or SELL
+          enum:
+          - BUY
+          - SELL
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int64
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        validity:
+          type: string
+          description: "Validity of the order - GFD, IOC etc"
+          enum:
+          - GFD
+        variety:
+          type: string
+          description: "Variety of the order - REGULAR, AMO, SQUAREOFF - for Super\
+            \ Multiple Orders etc"
+          enum:
+          - REGULAR
+          - SQUAREOFF
+        disclosedQuantity:
+          type: integer
+          description: Quantity to be disclosed in order
+          format: int32
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+        tag:
+          type: string
+          description: Tag for this order
+    order_sor_body:
+      required:
+      - orderId
+      properties:
+        orderId:
+          type: string
+          description: Order ID of the order to be modified
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int32
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        disclosedQuantity:
+          type: integer
+          description: Quantity to be disclosed in order
+          format: int32
+        originalOpenQuantity:
+          type: integer
+          description: Original open quantity of order
+          format: int32
+        originalPrice:
+          type: number
+          description: Original order price input by client/user.
+          format: float
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+        validity:
+          type: string
+          description: "Validity of the order - GFD, IOC etc"
+          enum:
+          - GFD
+          - IOC
+    inline_response_200_1:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_1_Success'
+      example:
+        Success:
+          NSE:
+            quantity: 1.4658129805029452
+            orderId: 0.8008281904610115
+            price: 6.027456183070403
+            message: message
+          BSE: null
+    order_sor_body_1:
+      properties:
+        instrumentToken:
+          type: integer
+          description: Instrument token of the scrip to be traded
+          format: int64
+        transactionType:
+          type: string
+          description: Transaction Type - BUY or SELL
+          enum:
+          - BUY
+          - SELL
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int64
+        price:
+          type: number
+          description: Order Price for SOR order is always zero i.e. Market Order
+          format: float
+        validity:
+          type: string
+          description: Validity of the order - GFD for SOR by default
+          enum:
+          - GFD
+        variety:
+          type: string
+          description: Variety of the SOR order - REGULAR by Default.
+          enum:
+          - REGULAR
+        tag:
+          type: string
+          description: Tag for this order
+    order_mtf_body:
+      required:
+      - orderId
+      properties:
+        orderId:
+          type: string
+          description: Order ID of the order to be modified
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int32
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        disclosedQuantity:
+          type: integer
+          description: Quantity to be disclosed in order
+          format: int32
+        originalOpenQuantity:
+          type: integer
+          description: Original open quantity of order
+          format: int32
+        originalPrice:
+          type: number
+          description: Original order price input by client/user.
+          format: float
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+        validity:
+          type: string
+          description: "Validity of the order - GFD, IOC etc"
+          enum:
+          - GFD
+          - IOC
+    order_mtf_body_1:
+      properties:
+        instrumentToken:
+          type: integer
+          description: Instrument token of the scrip to be traded
+          format: int64
+        transactionType:
+          type: string
+          description: Transaction Type - BUY or SELL
+          enum:
+          - BUY
+          - SELL
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int64
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        validity:
+          type: string
+          description: "Validity of the order - GFD, IOC etc"
+          enum:
+          - GFD
+          - IOC
+        variety:
+          type: string
+          description: "Variety of the order - REGULAR, AMO, SQUAREOFF - for Super\
+            \ Multiple Orders etc"
+          enum:
+          - REGULAR
+          - AMO
+        disclosedQuantity:
+          type: integer
+          description: Quantity to be disclosed in order
+          format: int32
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+        tag:
+          type: string
+          description: Tag for this order
+    order_mis_body:
+      required:
+      - orderId
+      properties:
+        orderId:
+          type: string
+          description: Order ID of the order to be modified
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int32
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        disclosedQuantity:
+          type: integer
+          description: Quantity to be disclosed in order
+          format: int32
+        originalOpenQuantity:
+          type: integer
+          description: Original open quantity of order
+          format: int32
+        originalPrice:
+          type: number
+          description: Original order price input by client/user.
+          format: float
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+        validity:
+          type: string
+          description: "Validity of the order - GFD, IOC etc"
+          enum:
+          - GFD
+          - IOC
+    order_mis_body_1:
+      properties:
+        instrumentToken:
+          type: integer
+          description: Instrument token of the scrip to be traded
+          format: int64
+        transactionType:
+          type: string
+          description: Transaction Type - BUY or SELL
+          enum:
+          - BUY
+          - SELL
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int64
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        validity:
+          type: string
+          description: "Validity of the order - GFD, IOC etc"
+          enum:
+          - GFD
+          - IOC
+        variety:
+          type: string
+          description: "Variety of the order - REGULAR, AMO, SQUAREOFF - for Super\
+            \ Multiple Orders etc"
+          enum:
+          - REGULAR
+          - AMO
+        disclosedQuantity:
+          type: integer
+          description: Quantity to be disclosed in order
+          format: int32
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+        tag:
+          type: string
+          description: Tag for this order
+    inline_response_200_Success_Exchange:
+      type: object
+      properties:
+        message:
+          type: string
+        orderId:
+          type: number
+        price:
+          type: number
+        quantity:
+          type: number
+      example:
+        quantity: 1.4658129805029452
+        orderId: 0.8008281904610115
+        price: 6.027456183070403
+        message: message
+    inline_response_200_Success:
+      type: object
+      properties:
+        Exchange:
+          $ref: '#/components/schemas/inline_response_200_Success_Exchange'
+      example:
+        Exchange:
+          quantity: 1.4658129805029452
+          orderId: 0.8008281904610115
+          price: 6.027456183070403
+          message: message
+    inline_response_200_1_Success:
+      type: object
+      properties:
+        NSE:
+          $ref: '#/components/schemas/inline_response_200_Success_Exchange'
+        BSE:
+          $ref: '#/components/schemas/inline_response_200_Success_Exchange'
+      example:
+        NSE:
+          quantity: 1.4658129805029452
+          orderId: 0.8008281904610115
+          price: 6.027456183070403
+          message: message
+        BSE: null
+  securitySchemes:
+    default:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://tradeapi.kotaksecurities.com/authorize
+          scopes: {}

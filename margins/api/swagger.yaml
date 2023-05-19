@@ -1,0 +1,1466 @@
+openapi: 3.0.1
+info:
+  title: Margins-API
+  description: Margin API's
+  version: "1.0"
+servers:
+- url: https://tradeapi.kotaksecurities.com/apim/margin/1.0
+security:
+- default: []
+tags:
+- name: Margin
+  description: Details of margins API's.
+- name: Margin Calculator
+  description: Margin calculator API Details.
+- name: Margin-Equities
+  description: Details of Equity Margins API's.
+- name: Margin-Derivatives
+  description: Details of  Derivaties Margins API's.
+- name: Margin-Currency
+  description: Details of Currenccy Margins API's.
+- name: Margin-Commodities
+  description: Details of Commodities Margins API's.
+- name: Margin-Basecapital History
+  description: Details of Available Cash Balance History
+- name: Margin-Security
+  description: Details of Security Margin.
+- name: Margin-Utilistion
+  description: Details of margins Utilisation.
+- name: Margin-Option Premium
+  description: Details of Option Premium.
+paths:
+  /margin/required:
+    post:
+      tags:
+      - Margin Calculator
+      summary: Get Margin Required for an order by amount or quantity.
+      description: "Returns margin required for Equity, Super Multiple & MTF Order."
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/margin_required_body'
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin:
+    get:
+      tags:
+      - Margin
+      summary: Complete Margin
+      description: Gives complete Margin Details of a Client from RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin-mini:
+    get:
+      tags:
+      - Margin
+      summary: Margin Minified Data
+      description: Gives Mini version of Margin Details of a Client from RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/equities:
+    get:
+      tags:
+      - Margin-Equities
+      summary: Equity Margin
+      description: Gives complete Equity Margin Details of a Client from RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/equities/{exchange}:
+    get:
+      tags:
+      - Margin-Equities
+      summary: Exchange wise Equities Margin
+      description: Gives Exchagne wise Equities Margin Details of a Client from RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: exchange
+        in: path
+        description: "Possible Values  : NSE, BSE"
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/derivatives:
+    get:
+      tags:
+      - Margin-Derivatives
+      summary: Derivatives Margin
+      description: Gives Derivatives Margin Details of a Client from RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/derivatives/{exchange}:
+    get:
+      tags:
+      - Margin-Derivatives
+      summary: Exchange wise Derivatives Margin
+      description: Gives Exchagne wise Derivatives Margin Details of a Client from
+        RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: exchange
+        in: path
+        description: "Possible Values  : NSE, BSE"
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/currency:
+    get:
+      tags:
+      - Margin-Currency
+      summary: Currency Margin
+      description: Gives Currency Margin Details of a Client from RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/currency/{exchange}:
+    get:
+      tags:
+      - Margin-Currency
+      summary: Exchange wise Currency Margin
+      description: Gives Exchagne wise Currency Margin Details of a Client from RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: exchange
+        in: path
+        description: "Possible Values  : NSE, MCX"
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/commodities:
+    get:
+      tags:
+      - Margin-Commodities
+      summary: Commodities Margin
+      description: Gives Commodities Margin Details of a Client from RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/commodities/{exchange}:
+    get:
+      tags:
+      - Margin-Commodities
+      summary: Exchange wise Commodities Margin
+      description: Gives Exchagne wise Commodities Margin Details of a Client from
+        RMS
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: exchange
+        in: path
+        description: "Possible Values  : MCX"
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/cashbalance-history:
+    get:
+      tags:
+      - Margin-Basecapital History
+      summary: Base Capital History
+      description: Gives Transaction History of Basecapital i.e. Availalbe Cash Balance.
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/security/cash:
+    get:
+      tags:
+      - Margin-Security
+      summary: Security Margin Cash
+      description: Gives Security Margin for Cash Segment
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/security/mtf:
+    get:
+      tags:
+      - Margin-Security
+      summary: Security Margin MTF
+      description: Gives Security Margin for MTF.
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/utilisation/cash:
+    get:
+      tags:
+      - Margin-Utilistion
+      summary: Margin Utilisaction for Cash
+      description: Gives Margin Utilisation for Cash Segment
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/utilisation/mtf:
+    get:
+      tags:
+      - Margin-Utilistion
+      summary: Margin Utilisaction for MTF
+      description: Gives Margin Utilisation for MTF
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /margin/option-premium:
+    get:
+      tags:
+      - Margin-Option Premium
+      summary: Option Premium Details
+      description: Gives Option Premium details for a client
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Gets the Margin required by client for order.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/marginDet'
+                x-content-type: application/json
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+components:
+  schemas:
+    fault:
+      title: Default Fault
+      type: object
+      properties:
+        code:
+          type: integer
+          description: error code
+          format: int32
+        message:
+          type: string
+          description: error message
+        description:
+          type: string
+          description: error description
+      description: Fault Details
+    orderInfo:
+      title: Margin info.
+      type: object
+      properties:
+        instrumentToken:
+          type: integer
+          description: Instrument token of the scrip to be traded
+          format: int64
+        quantity:
+          type: integer
+          description: Order quantity - specified in same unit as quoted in market
+            depth
+          format: int32
+        price:
+          type: number
+          description: "Order Price, non zero positive for limit order and zero for\
+            \ market order"
+          format: float
+        amount:
+          type: integer
+          description: Order Amount
+          format: int32
+        triggerPrice:
+          type: number
+          description: "Trigger price, required for stoploss or supermultiple order"
+          format: float
+      description: Order info for Margin Details
+    marginDet:
+      title: Margin required response
+      type: object
+      properties:
+        instrumentToken:
+          type: integer
+          format: int64
+        normal:
+          type: number
+          description: Order Status
+          format: float
+        supermultiple:
+          type: number
+          description: Order Status
+          format: float
+        mtf:
+          type: number
+          description: Order Status
+          format: float
+      example:
+        normal: 6.0274563
+        instrumentToken: 0
+        supermultiple: 1.4658129
+        mtf: 5.962134
+    margin_required_body:
+      properties:
+        transactionType:
+          type: string
+          description: Transaction Type - BUY or SELL
+          enum:
+          - BUY
+          - SELL
+        orderInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/orderInfo'
+  securitySchemes:
+    default:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://tradeapi.kotaksecurities.com/authorize
+          scopes: {}

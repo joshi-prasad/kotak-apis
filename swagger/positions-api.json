@@ -1,0 +1,660 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Positions-API",
+    "description": "Positions API's",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://tradeapi.kotaksecurities.com/apim/positions/1.0"
+    }
+  ],
+  "security": [
+    {
+      "default": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Positions",
+      "description": "Details of Positions API's."
+    }
+  ],
+  "paths": {
+    "/positions": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "summary": "Get's raw position from Trading Engine.",
+        "description": "Snapshot of Position data for a client available in System.",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the Raw Positoin data for a client account.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/positions"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/positions/todays": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "summary": "Get's Todays position.",
+        "description": "Gets Today's Position of a client.",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the Raw Positoin data for a client account.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/todays"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/positions/open": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "summary": "Get's Open position.",
+        "description": "Gets Open Position of a client.",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets the Raw Positoin data for a client account.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/open"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/positions/stocks": {
+      "get": {
+        "tags": [
+          "Positions"
+        ],
+        "summary": "Get's Sell from Existing stocks.",
+        "description": "Gets Stocks position eligible for sell from existing for a client.",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets Stocks client account.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/stocks"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "fault": {
+        "title": "Default Fault",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "error code",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "error message"
+          },
+          "description": {
+            "type": "string",
+            "description": "error description"
+          }
+        },
+        "description": "Fault Details"
+      },
+      "positions": {
+        "title": "Margi info.",
+        "type": "object",
+        "properties": {
+          "instrumentToken": {
+            "type": "integer",
+            "description": "Instrument token of the scrip to be traded",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Order quantity - specified in same unit as quoted in market depth",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "description": "Order Price, non zero positive for limit order and zero for market order",
+            "format": "float"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Order Amount",
+            "format": "int32"
+          },
+          "triggerPrice": {
+            "type": "number",
+            "description": "Trigger price, required for stoploss or supermultiple order",
+            "format": "float"
+          }
+        },
+        "description": "Order info for Margin Details"
+      },
+      "todays": {
+        "title": "Margin required response",
+        "type": "object",
+        "properties": {
+          "instrumentToken": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "normal": {
+            "type": "number",
+            "description": "Order Status",
+            "format": "float"
+          },
+          "supermultiple": {
+            "type": "number",
+            "description": "Order Status",
+            "format": "float"
+          },
+          "mtf": {
+            "type": "number",
+            "description": "Order Status",
+            "format": "float"
+          }
+        }
+      },
+      "open": {
+        "title": "Margin required response",
+        "type": "object",
+        "properties": {
+          "instrumentToken": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "normal": {
+            "type": "number",
+            "description": "Order Status",
+            "format": "float"
+          },
+          "supermultiple": {
+            "type": "number",
+            "description": "Order Status",
+            "format": "float"
+          },
+          "mtf": {
+            "type": "number",
+            "description": "Order Status",
+            "format": "float"
+          }
+        }
+      },
+      "stocks": {
+        "title": "Margin required response",
+        "type": "object",
+        "properties": {
+          "instrumentToken": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "normal": {
+            "type": "number",
+            "description": "Order Status",
+            "format": "float"
+          },
+          "supermultiple": {
+            "type": "number",
+            "description": "Order Status",
+            "format": "float"
+          },
+          "mtf": {
+            "type": "number",
+            "description": "Order Status",
+            "format": "float"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "default": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://tradeapi.kotaksecurities.com/authorize",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}

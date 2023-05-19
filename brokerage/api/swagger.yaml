@@ -1,0 +1,72 @@
+openapi: 3.0.1
+info:
+  title: Brokerage-API
+  version: "1.0"
+servers:
+- url: https://tradeapi.kotaksecurities.com/apim/brokerage/1.0
+security:
+- default: []
+paths:
+  /getBrokerageChargesDetails:
+    post:
+      parameters:
+      - name: userparams
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: ks_ses_token
+        in: header
+        description: "base64('{\"clientId\":\"your-clientId\",\"sessionToken\":\"\
+          your-sessionToken\",\"sourceConsumerKey\":\"your-sourceConsumerKey\"}')"
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/getBrokerageChargesDetails_body'
+      responses:
+        "200":
+          description: ok
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+components:
+  schemas:
+    getBrokerageChargesDetails_body:
+      type: object
+      properties:
+        data:
+          type: array
+          description: "Scripwise array of data (Array of length 1 for normal order,\
+            \ in case of basket order, multiple arrays to be sent)"
+          items:
+            type: array
+            description: "[\"wtoken\",\"price\",\"quantity\",\"display_segment\",\"\
+              lot_size\",\"display_fno_eq\",\"order_type\",\"order_action\",\"market_exchange\"\
+              ,\"script\"]"
+            items:
+              type: string
+              example: "727"
+        no_of_records:
+          type: integer
+          description: Count of total records of data
+          example: 1
+        wlsrc:
+          type: string
+          description: Platform name/ Code
+          example: TRADEAPI
+  securitySchemes:
+    default:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://tradeapi.kotaksecurities.com/authorize
+          scopes: {}

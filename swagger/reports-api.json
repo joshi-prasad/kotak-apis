@@ -1,0 +1,1345 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Reports-KSEC",
+    "description": "Order Reports API's",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://tradeapi.kotaksecurities.com/apim/reports/1.0"
+    }
+  ],
+  "security": [
+    {
+      "default": []
+    }
+  ],
+  "paths": {
+    "/orders": {
+      "get": {
+        "summary": "Get order report",
+        "description": "Returns the full order report for a client.",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order Report of a client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Orders"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/orders/{orderId}": {
+      "get": {
+        "summary": "Get order report by orderId",
+        "description": "Returns the specific order report",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order Report of a client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "activityTimestamp": {
+                            "type": "string"
+                          },
+                          "disclosedQuantity": {
+                            "type": "number"
+                          },
+                          "exchOrderId": {
+                            "type": "string"
+                          },
+                          "exchTradeId": {
+                            "type": "string"
+                          },
+                          "exchangeStatus": {
+                            "type": "string"
+                          },
+                          "filledQuantity": {
+                            "type": "number"
+                          },
+                          "message": {
+                            "type": "string"
+                          },
+                          "orderQuantity": {
+                            "type": "number"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "statusInfo": {
+                            "type": "string"
+                          },
+                          "statusMessage": {
+                            "type": "string"
+                          },
+                          "triggerPrice": {
+                            "type": "number"
+                          },
+                          "validity": {
+                            "type": "string"
+                          },
+                          "version": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/orders/{orderId}/{isFNO}": {
+      "get": {
+        "summary": "Get order report by orderId",
+        "description": "Returns the specific order report",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isFNO",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order Report of a client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "activityTimestamp": {
+                            "type": "string"
+                          },
+                          "disclosedQuantity": {
+                            "type": "number"
+                          },
+                          "exchOrderId": {
+                            "type": "string"
+                          },
+                          "exchTradeId": {
+                            "type": "string"
+                          },
+                          "exchangeStatus": {
+                            "type": "string"
+                          },
+                          "filledQuantity": {
+                            "type": "number"
+                          },
+                          "message": {
+                            "type": "string"
+                          },
+                          "orderQuantity": {
+                            "type": "number"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "statusInfo": {
+                            "type": "string"
+                          },
+                          "statusMessage": {
+                            "type": "string"
+                          },
+                          "triggerPrice": {
+                            "type": "number"
+                          },
+                          "validity": {
+                            "type": "string"
+                          },
+                          "version": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/trades": {
+      "get": {
+        "summary": "Get trade report",
+        "description": "Returns the full trade report",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "description": "Unique ID for your application",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "description": "Session ID for your application",
+            "required": false,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade Report of a client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "exchange": {
+                            "type": "string"
+                          },
+                          "exchangeTradeId": {
+                            "type": "string"
+                          },
+                          "expiryDate": {
+                            "type": "string"
+                          },
+                          "instrumentName": {
+                            "type": "string"
+                          },
+                          "instrumentToken": {
+                            "type": "number"
+                          },
+                          "instrumentType": {
+                            "type": "string"
+                          },
+                          "isFNO": {
+                            "type": "string"
+                          },
+                          "marketExchange": {
+                            "type": "string"
+                          },
+                          "marketLot": {
+                            "type": "number"
+                          },
+                          "multiplier": {
+                            "type": "number"
+                          },
+                          "optionType": {
+                            "type": "string"
+                          },
+                          "orderId": {
+                            "type": "number"
+                          },
+                          "orderTimestamp": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "product": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "number"
+                          },
+                          "statusInfo": {
+                            "type": "string"
+                          },
+                          "statusMessage": {
+                            "type": "string"
+                          },
+                          "strikePrice": {
+                            "type": "number"
+                          },
+                          "tradeId": {
+                            "type": "number"
+                          },
+                          "tradeTimestamp": {
+                            "type": "string"
+                          },
+                          "transactionType": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/trades/{orderId}": {
+      "get": {
+        "summary": "Get trade report by orderId",
+        "description": "Returns the trade report for a orderId",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "description": "Unique ID for your application",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "description": "Session ID for your application",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade Report of a client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "activityTimestamp": {
+                            "type": "string"
+                          },
+                          "disclosedQuantity": {
+                            "type": "number"
+                          },
+                          "exchOrderId": {
+                            "type": "string"
+                          },
+                          "exchTradeId": {
+                            "type": "string"
+                          },
+                          "exchangeStatus": {
+                            "type": "string"
+                          },
+                          "filledQuantity": {
+                            "type": "number"
+                          },
+                          "message": {
+                            "type": "string"
+                          },
+                          "orderQuantity": {
+                            "type": "number"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "statusInfo": {
+                            "type": "string"
+                          },
+                          "statusMessage": {
+                            "type": "string"
+                          },
+                          "triggerPrice": {
+                            "type": "number"
+                          },
+                          "validity": {
+                            "type": "string"
+                          },
+                          "version": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/trades/{orderId}/{isFNO}": {
+      "get": {
+        "summary": "Get trade report by orderId",
+        "description": "Returns the trade report for a orderId",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "description": "Unique ID for your application",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "description": "Session ID for your application",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isFNO",
+            "in": "path",
+            "description": "Session ID for your application",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trade Report of a client",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "activityTimestamp": {
+                            "type": "string"
+                          },
+                          "disclosedQuantity": {
+                            "type": "number"
+                          },
+                          "exchOrderId": {
+                            "type": "string"
+                          },
+                          "exchTradeId": {
+                            "type": "string"
+                          },
+                          "exchangeStatus": {
+                            "type": "string"
+                          },
+                          "filledQuantity": {
+                            "type": "number"
+                          },
+                          "message": {
+                            "type": "string"
+                          },
+                          "orderQuantity": {
+                            "type": "number"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "statusInfo": {
+                            "type": "string"
+                          },
+                          "statusMessage": {
+                            "type": "string"
+                          },
+                          "triggerPrice": {
+                            "type": "number"
+                          },
+                          "validity": {
+                            "type": "string"
+                          },
+                          "version": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Orders": {
+        "title": "Order Report",
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "number",
+            "format": "int64"
+          },
+          "variety": {
+            "type": "string",
+            "enum": [
+              "REGULAR",
+              "AMO",
+              "SQUAREOFF"
+            ]
+          },
+          "instrumentName": {
+            "type": "string"
+          },
+          "instrumentToken": {
+            "type": "string"
+          },
+          "exchange": {
+            "type": "string",
+            "enum": [
+              "NSE",
+              "BSE",
+              "NSE-FX",
+              "MCX-CM",
+              "NCDEX-CM",
+              "BSE-FX",
+              "MSEI-SX"
+            ]
+          },
+          "orderQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pendingQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cancelledQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "filledQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "disclosedQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "triggerPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "int64"
+          },
+          "product": {
+            "type": "string",
+            "enum": [
+              "NORMAL",
+              "SUPERMULTIPLE",
+              "SUPERMULTIPLEOPTION",
+              "MTF",
+              "TSLONEW",
+              "BRACKETNEW",
+              "TSLO",
+              "BRACKET",
+              "GTC",
+              "COD",
+              "CONVERT"
+            ]
+          },
+          "transactionType": {
+            "type": "string",
+            "enum": [
+              "BUY",
+              "SELL"
+            ]
+          },
+          "orderTimestamp": {
+            "type": "string"
+          },
+          "validity": {
+            "type": "string",
+            "enum": [
+              "GFD",
+              "IOC"
+            ]
+          },
+          "statusMessage": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order Status",
+            "enum": [
+              "placed",
+              "approved",
+              "delivered"
+            ]
+          },
+          "statusInfo": {
+            "type": "string"
+          },
+          "isFNO": {
+            "type": "string"
+          },
+          "leg": {
+            "type": "number",
+            "format": "int64"
+          },
+          "multiplier": {
+            "type": "number",
+            "format": "int64"
+          },
+          "marketLot": {
+            "type": "number",
+            "format": "int64"
+          },
+          "strikePrice": {
+            "type": "number",
+            "format": "int64"
+          },
+          "marketExchange": {
+            "type": "string"
+          },
+          "optionType": {
+            "type": "string"
+          },
+          "exchangeOrderId": {
+            "type": "string"
+          },
+          "expiryDate": {
+            "type": "string"
+          },
+          "instrumentType": {
+            "type": "string"
+          }
+        },
+        "description": "Order Report for a client.",
+        "xml": {
+          "name": "Order"
+        }
+      },
+      "History": {
+        "title": "Order History",
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "price": {
+            "type": "number",
+            "format": "int64"
+          },
+          "filledQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "exchangeStatus": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order Status",
+            "enum": [
+              "placed",
+              "approved",
+              "delivered"
+            ]
+          },
+          "disclosedQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "triggerPrice": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "validity": {
+            "type": "string",
+            "enum": [
+              "GFD",
+              "IOC"
+            ]
+          },
+          "exchOrderId": {
+            "type": "string"
+          },
+          "exchTradeId": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "activityTimestamp": {
+            "type": "string"
+          }
+        },
+        "description": "Order History of Order",
+        "xml": {
+          "name": "Order"
+        }
+      },
+      "fault": {
+        "title": "Default Fault",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "error code",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "error message"
+          },
+          "description": {
+            "type": "string",
+            "description": "error description"
+          }
+        },
+        "description": "Fault Details"
+      }
+    },
+    "securitySchemes": {
+      "default": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://tradeapi.kotaksecurities.com/authorize",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}

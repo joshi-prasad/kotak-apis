@@ -1,0 +1,676 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Quotes - KSEC",
+    "description": "This is a sample server for Kotak Trade API - Quote",
+    "version": "v1.0"
+  },
+  "servers": [
+    {
+      "url": "https://tradeapi.kotaksecurities.com/apim/quotes/v1.0"
+    }
+  ],
+  "security": [
+    {
+      "default": []
+    }
+  ],
+  "paths": {
+    "/depth/instruments/{instrumentTokens}": {
+      "get": {
+        "tags": [
+          "quote"
+        ],
+        "summary": "Get market details quote",
+        "description": "Returns market depth details for an array of scrips",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instrumentTokens",
+            "in": "path",
+            "description": "Instrument token of the scrip for which quote",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Full Quote fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instrumentName": {
+                      "type": "string",
+                      "description": "Name of the instrument"
+                    },
+                    "instrumentToken": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "lastUpdatedTime": {
+                      "type": "integer",
+                      "description": "Last time in epoch format when this data was updated",
+                      "format": "int64"
+                    },
+                    "lastTradedTime": {
+                      "type": "integer",
+                      "description": "Last time in epoch format when this scrip was traded",
+                      "format": "int64"
+                    },
+                    "lastPrice": {
+                      "type": "number",
+                      "description": "Last traded price",
+                      "format": "float"
+                    },
+                    "lastTradedQuantity": {
+                      "type": "integer",
+                      "description": "Last traded quantity",
+                      "format": "int32"
+                    },
+                    "totalBuyQuantity": {
+                      "type": "integer",
+                      "description": "Total bid quantity",
+                      "format": "int64"
+                    },
+                    "totalSellQuantity": {
+                      "type": "integer",
+                      "description": "Total ask quantity",
+                      "format": "int64"
+                    },
+                    "averageTradedPrice": {
+                      "type": "number",
+                      "description": "Average traded price for the day",
+                      "format": "float"
+                    },
+                    "openInterest": {
+                      "type": "integer",
+                      "description": "Open interest in case of derivateive contracts",
+                      "format": "int64"
+                    },
+                    "netChange": {
+                      "type": "number",
+                      "description": "Absolute change in price from previous day close",
+                      "format": "float"
+                    },
+                    "dprLow": {
+                      "type": "number",
+                      "description": "Lower value of daily price range",
+                      "format": "float"
+                    },
+                    "dprHigh": {
+                      "type": "number",
+                      "description": "Higher value of daily price range",
+                      "format": "float"
+                    },
+                    "ohlc": {
+                      "type": "object",
+                      "properties": {
+                        "open": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "high": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "low": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "close": {
+                          "type": "number",
+                          "format": "float"
+                        }
+                      }
+                    },
+                    "depth": {
+                      "type": "object",
+                      "properties": {
+                        "buy": {
+                          "type": "object",
+                          "properties": {
+                            "price": {
+                              "type": "number",
+                              "format": "float"
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "orders": {
+                              "type": "integer",
+                              "format": "int32"
+                            }
+                          }
+                        },
+                        "sell": {
+                          "type": "object",
+                          "properties": {
+                            "price": {
+                              "type": "number",
+                              "format": "float"
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "orders": {
+                              "type": "integer",
+                              "format": "int32"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/ohlc/instruments/{instrumentTokens}": {
+      "get": {
+        "tags": [
+          "quote"
+        ],
+        "summary": "Get OHLC quote",
+        "description": "Returns the OHLC quote details for an array of scrips",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instrumentTokens",
+            "in": "path",
+            "description": "Instrument token of the scrip for which quote",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OHLC Quote fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instrumentName": {
+                      "type": "string",
+                      "description": "Name of the instrument"
+                    },
+                    "instrumentToken": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "open": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "high": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "low": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "close": {
+                      "type": "number",
+                      "format": "float"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/ltp/instruments/{instrumentTokens}": {
+      "get": {
+        "tags": [
+          "quote"
+        ],
+        "summary": "Get LTP quote",
+        "description": "Returns the LTP for an array of scrips",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instrumentTokens",
+            "in": "path",
+            "description": "Instrument token of the scrip for which quote",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "LTP Quote fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "instrumentName": {
+                      "type": "string",
+                      "description": "Name of the instrument"
+                    },
+                    "instrumentToken": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "lastPrice": {
+                      "type": "number",
+                      "format": "float"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or missing input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid session, please re-login to continue",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests to the API",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Not able to communicate with OMS",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Trade API service is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Gateway timeout, trade API is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fault"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    },
+    "/instruments/{instrumentTokens}": {
+      "get": {
+        "tags": [
+          "quote"
+        ],
+        "summary": "Get full details",
+        "description": "Get full details",
+        "parameters": [
+          {
+            "name": "consumerKey",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sessionToken",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instrumentTokens",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok"
+          }
+        },
+        "security": [
+          {
+            "default": []
+          }
+        ],
+        "x-auth-type": "Application & Application User",
+        "x-throttling-tier": "Unlimited"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "fault": {
+        "title": "Default Fault",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "error code",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "error message"
+          },
+          "description": {
+            "type": "string",
+            "description": "error description"
+          }
+        },
+        "description": "Fault Details"
+      }
+    },
+    "securitySchemes": {
+      "default": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://tradeapi.kotaksecurities.com/authorize",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}

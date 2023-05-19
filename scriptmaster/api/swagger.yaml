@@ -1,0 +1,222 @@
+openapi: 3.0.1
+info:
+  title: ScripMaster-API
+  version: "1.1"
+servers:
+- url: https://tradeapi.kotaksecurities.com/apim/scripmaster/1.1
+security:
+- default: []
+tags:
+- name: Scripmaster
+  description: API to get dump of Scripmaster
+- name: Estimated Charges
+  description: API to get link of brokerage calculator
+paths:
+  /filename:
+    get:
+      tags:
+      - Scripmaster
+      summary: API to Get URL with filename from which master can be downloaded in
+        File Format.
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Scripmaster file URL to download entire scrips data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /estimatedcharges:
+    get:
+      tags:
+      - Estimated Charges
+      summary: API to Get URL of estimated charges.
+      parameters:
+      - name: consumerKey
+        in: header
+        description: Unique ID for your application
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Estimated charges URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "403":
+          description: "Invalid session, please re-login to continue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "502":
+          description: Not able to communicate with OMS
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - api_key: []
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+components:
+  schemas:
+    fault:
+      title: Default Fault
+      type: object
+      properties:
+        code:
+          type: integer
+          description: error code
+          format: int32
+        message:
+          type: string
+          description: error message
+        description:
+          type: string
+          description: error description
+      description: Fault Details
+    inline_response_200:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_Success'
+      example:
+        Success:
+          fno: fno
+          cash: cash
+    inline_response_400:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: error code
+          format: int32
+        message:
+          type: string
+          description: error message
+        description:
+          type: string
+          description: error description
+    inline_response_200_1:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_1_Success'
+      example:
+        Success:
+          weblink: weblink
+    inline_response_200_Success:
+      type: object
+      properties:
+        cash:
+          type: string
+        fno:
+          type: string
+      example:
+        fno: fno
+        cash: cash
+    inline_response_200_1_Success:
+      type: object
+      properties:
+        weblink:
+          type: string
+      example:
+        weblink: weblink
+  securitySchemes:
+    default:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://tradeapi.kotaksecurities.com/authorize
+          scopes: {}
