@@ -1,0 +1,1586 @@
+openapi: 3.0.1
+info:
+  title: Watchlist-API
+  version: "2.1"
+servers:
+- url: https://tradeapi.kotaksecurities.com/apim/watchlist/2.1
+security:
+- default: []
+tags:
+- name: watchlists
+  description: Details of Watchlist
+- name: watchlists-ByID
+  description: Details of Watchlist
+- name: watchlists-ByName
+  description: Details of Watchlist
+- name: watchdetails-ByID
+  description: Stock details of watchlist
+- name: watchdetails-ByName
+  description: Stock details of watchlist
+paths:
+  /watchlists:
+    get:
+      tags:
+      - watchlists
+      summary: List Watchlist
+      description: API to List watchlist for a UserId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /watchlists/byID:
+    put:
+      tags:
+      - watchlists
+      summary: Rearrange watchlist by Id
+      description: API to Rearrange Watchlist by Name for a UserId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/watchlists_byID_body'
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /watchlists/byID/{watchlistId}:
+    get:
+      tags:
+      - watchlists-ByID
+      summary: Get Watchlist by Watchlist Id
+      description: API To get Watchlist by watchlist ID for a UserId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    delete:
+      tags:
+      - watchlists-ByID
+      summary: Delete Watchlist by Watchlist Id
+      description: API to delete watchlist by watchlist Id for a user id
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /watchlists/byID/{watchlistId}/{newWatchlistName}:
+    put:
+      tags:
+      - watchlists-ByID
+      summary: Rename watchlist by Id
+      description: API to rename Watchlist by Name for a UserId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: newWatchlistName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /watchlists/byName/{watchlistName}:
+    get:
+      tags:
+      - watchlists-ByName
+      summary: Get Watchlist by NAme
+      description: API To get watchlist by Name for a UserId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    post:
+      tags:
+      - watchlists-ByName
+      summary: Create Watchlist
+      description: API To create new watchlist for UserId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_5'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    delete:
+      tags:
+      - watchlists-ByName
+      summary: Delete watchlist by NAme
+      description: API to delete watchlist by watchlist Name for a UserId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_6'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /watchlists/byName/{watchlistName}/{newWatchlistName}:
+    put:
+      tags:
+      - watchlists-ByName
+      summary: Rename watchlist by watchlist name.
+      description: API To rename watchlist by Watchlist Name for a UserId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: newWatchlistName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_7'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /watchdetails/byID/{watchlistId}/{instrumentToken}:
+    post:
+      tags:
+      - watchdetails-ByID
+      summary: Add Token to watchlist by watchlist id
+      description: API to add token token to a watchlist by Watchlist Id
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: instrumentToken
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_8'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    delete:
+      tags:
+      - watchdetails-ByID
+      summary: Delete token by Watchist Id
+      description: API to delete token from watchlist by watchlist Id for a UsreId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: instrumentToken
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /watchdetails/byName/{watchlistName}/{instrumentToken}:
+    post:
+      tags:
+      - watchdetails-ByName
+      summary: Add token by watchlist Name
+      description: API to add token to watchlist by Watchlist Name
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: instrumentToken
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_8'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    delete:
+      tags:
+      - watchdetails-ByName
+      summary: Delete Token by watchlist Name
+      description: API to Delete token by Watchlist Name for a userId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: instrumentToken
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /watchdetails/byName/{watchlistName}:
+    put:
+      tags:
+      - watchdetails-ByName
+      summary: Synchronise Watchlist by Watchlist Name
+      description: API to save watchlist in same order seqence tokens arrya passed
+        in request json payload by Watchlist Name
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistName
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/byName_watchlistName_body'
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /watchdetails/byID/{watchlistId}:
+    put:
+      tags:
+      - watchdetails-ByID
+      summary: Synchronise Watchlist By watchlist Id
+      description: API to save watchlist in same order seqence tokens arrya passed
+        in request json payload by Watchlist ID
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: watchlistId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: integer
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/byName_watchlistName_body'
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fault'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+components:
+  schemas:
+    fault:
+      title: Default Fault
+      type: object
+      properties:
+        code:
+          type: integer
+          description: error code
+          format: int32
+        message:
+          type: string
+          description: error message
+        description:
+          type: string
+          description: error description
+      description: Fault Details
+    inline_response_200:
+      type: object
+      properties:
+        Success:
+          type: array
+          items:
+            $ref: '#/components/schemas/inline_response_200_Success'
+      example:
+        Success:
+        - watchlistId: 1.4658129805029452
+          instrumentCount: 0.8008281904610115
+          watchlistName: watchlistName
+          lastAccess: 6.027456183070403
+        - watchlistId: 1.4658129805029452
+          instrumentCount: 0.8008281904610115
+          watchlistName: watchlistName
+          lastAccess: 6.027456183070403
+    watchlistsbyID_Success:
+      type: object
+      properties:
+        watchlistId:
+          type: number
+          description: Unique Watchlist Id
+        watchlistName:
+          type: string
+          description: Name of the Wathchlist
+      example:
+        watchlistId: 0.8008281904610115
+        watchlistName: watchlistName
+    watchlists_byID_body:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/watchlistsbyID_Success'
+    inline_response_200_1:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_1_Success'
+      example:
+        Success:
+          message: message
+    inline_response_200_2:
+      type: object
+      properties:
+        Success:
+          type: array
+          items:
+            $ref: '#/components/schemas/inline_response_200_2_Success'
+      example:
+        Success:
+        - expiryDate: expiryDate
+          optionType: optionType
+          symbol: symbol
+          securityName: securityName
+          instrumentToken: 0.8008281904610115
+          exchange: exchange
+          tokenAddedLtp: 1.4658129805029452
+          it: it
+          tokenAddedTime: tokenAddedTime
+          strikePrice: 6.027456183070403
+        - expiryDate: expiryDate
+          optionType: optionType
+          symbol: symbol
+          securityName: securityName
+          instrumentToken: 0.8008281904610115
+          exchange: exchange
+          tokenAddedLtp: 1.4658129805029452
+          it: it
+          tokenAddedTime: tokenAddedTime
+          strikePrice: 6.027456183070403
+    inline_response_200_3:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_3_Success'
+      example:
+        Success:
+          watchlistId: 0.8008281904610115
+          message: message
+    inline_response_200_4:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_4_Success'
+      example:
+        Success:
+          watchlistId: 0.8008281904610115
+          newWatchlistName: newWatchlistName
+    inline_response_200_5:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/watchlistsbyID_Success'
+      example:
+        Success:
+          watchlistId: 0.8008281904610115
+          watchlistName: watchlistName
+    inline_response_200_6:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_6_Success'
+      example:
+        Success:
+          watchlistId: 0.8008281904610115
+          message: message
+    inline_response_200_7:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_7_Success'
+      example:
+        Success:
+          watchlistId: 0.8008281904610115
+          newWatchlistName: newWatchlistName
+    inline_response_200_8:
+      type: object
+      properties:
+        Success:
+          $ref: '#/components/schemas/inline_response_200_8_Success'
+      example:
+        Success:
+          symbol: symbol
+          securityName: securityName
+          watchlistId: 5.962133916683182
+          watchlistName: watchlistName
+          instrumentToken: 0.8008281904610115
+          it: it
+          tokenAddedTime: tokenAddedTime
+          message: message
+          expiryDate: expiryDate
+          optionType: optionType
+          exchange: exchange
+          tokenAddedLtp: 1.4658129805029452
+          strikePrice: 6.027456183070403
+    byName_watchlistName_body:
+      type: object
+      properties:
+        instumentToken:
+          type: integer
+          description: Unique token of security
+          example: 727
+        tokenAddedTime:
+          type: string
+          description: Blank in case not available else as recieved in Get Watchlist
+            details
+        tokenAddedLtp:
+          type: number
+          description: 0 if not available else as recieved in get Watchlist Details
+    inline_response_200_Success:
+      type: object
+      properties:
+        instrumentCount:
+          type: number
+          description: Unique Security Token.
+        lastAccess:
+          type: number
+          description: Last Access Flag
+        watchlistId:
+          type: number
+          description: Unique Id of watchlist.
+        watchlistName:
+          type: string
+          description: Name of the watchlist.
+      example:
+        watchlistId: 1.4658129805029452
+        instrumentCount: 0.8008281904610115
+        watchlistName: watchlistName
+        lastAccess: 6.027456183070403
+    inline_response_200_1_Success:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Response Message from Service
+      example:
+        message: message
+    inline_response_200_2_Success:
+      type: object
+      properties:
+        exchange:
+          type: string
+          description: Market Exchange of Security.
+        expiryDate:
+          type: string
+          description: Expiry Date of Token.
+        instrumentToken:
+          type: number
+          description: Unique Security Token.
+        it:
+          type: string
+          description: Instrument type of security.
+        optionType:
+          type: string
+          description: Option type of security.
+        securityName:
+          type: string
+          description: Display Name of security.
+        strikePrice:
+          type: number
+          description: Strike price of security.
+        symbol:
+          type: string
+          description: Sybol of Security
+        tokenAddedLtp:
+          type: number
+          description: LTP of security when added to watchlist.
+        tokenAddedTime:
+          type: string
+          description: time when security added to watchlist.
+      example:
+        expiryDate: expiryDate
+        optionType: optionType
+        symbol: symbol
+        securityName: securityName
+        instrumentToken: 0.8008281904610115
+        exchange: exchange
+        tokenAddedLtp: 1.4658129805029452
+        it: it
+        tokenAddedTime: tokenAddedTime
+        strikePrice: 6.027456183070403
+    inline_response_200_3_Success:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Response message from service.
+        watchlistId:
+          type: number
+          description: Unique Deleted Watchlist Id .
+      example:
+        watchlistId: 0.8008281904610115
+        message: message
+    inline_response_200_4_Success:
+      type: object
+      properties:
+        newWatchlistName:
+          type: string
+          description: Response message from service.
+        watchlistId:
+          type: number
+          description: Renamed Watchlist Id.
+      example:
+        watchlistId: 0.8008281904610115
+        newWatchlistName: newWatchlistName
+    inline_response_200_6_Success:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Response Message from Service
+        watchlistId:
+          type: number
+          description: Unique Watchlist Id
+      example:
+        watchlistId: 0.8008281904610115
+        message: message
+    inline_response_200_7_Success:
+      type: object
+      properties:
+        newWatchlistName:
+          type: string
+          description: New Watchlist Name
+        watchlistId:
+          type: number
+          description: Unique Watchlist Id
+      example:
+        watchlistId: 0.8008281904610115
+        newWatchlistName: newWatchlistName
+    inline_response_200_8_Success:
+      type: object
+      properties:
+        exchange:
+          type: string
+        expiryDate:
+          type: string
+        instrumentToken:
+          type: number
+          description: Unique Security Token.
+        it:
+          type: string
+          description: Instrument type of security.
+        message:
+          type: string
+          description: Response message on success from service.
+        optionType:
+          type: string
+          description: Option type of security.
+        securityName:
+          type: string
+          description: Display Name of security.
+        strikePrice:
+          type: number
+          description: Strike price of security.
+        symbol:
+          type: string
+          description: Sybol of Security
+        tokenAddedLtp:
+          type: number
+          description: LTP of security when added to watchlist.
+        tokenAddedTime:
+          type: string
+          description: time when security added to watchlist.
+        watchlistId:
+          type: number
+          description: Watchlist Id to which instumentToken is aded.
+        watchlistName:
+          type: string
+          description: Name of teh watchlist.
+      example:
+        symbol: symbol
+        securityName: securityName
+        watchlistId: 5.962133916683182
+        watchlistName: watchlistName
+        instrumentToken: 0.8008281904610115
+        it: it
+        tokenAddedTime: tokenAddedTime
+        message: message
+        expiryDate: expiryDate
+        optionType: optionType
+        exchange: exchange
+        tokenAddedLtp: 1.4658129805029452
+        strikePrice: 6.027456183070403
+  securitySchemes:
+    default:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://tradeapi.kotaksecurities.com/authorize
+          scopes: {}

@@ -1,0 +1,1374 @@
+openapi: 3.0.1
+info:
+  title: Session-API
+  version: "1.0"
+servers:
+- url: https://tradeapi.kotaksecurities.com/apim/session/1.0
+security:
+- default: []
+tags:
+- name: session-Init
+  description: Details of Session
+- name: session-Login
+  description: Details of Session
+- name: session-2FA
+  description: Details of Session
+- name: Session-2FA - TradeAPI
+  description: TradeAPI 2FA using OneTimeToken
+paths:
+  /session/init:
+    get:
+      tags:
+      - session-Init
+      summary: Initialise Session
+      description: API to initiate trading session for a UserId
+      parameters:
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /session/init/userid/{userid}:
+    get:
+      tags:
+      - session-Init
+      summary: Initialise Session by UserId
+      description: API to initiate trading session for a UserId
+      parameters:
+      - name: userid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /session/init/nickname/{nickname}:
+    get:
+      tags:
+      - session-Init
+      summary: Initialise Session by nickname
+      description: API to initiate trading session for a nickname
+      parameters:
+      - name: nickname
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /session/login/userid:
+    post:
+      tags:
+      - session-Login
+      summary: Login using Userid
+      description: Authenticate userid and password to gnerrated one time token
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login_userid_body'
+      responses:
+        "200":
+          description: User session validated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /session/login/nickname:
+    post:
+      tags:
+      - session-Login
+      summary: Login using nickname
+      description: Authenticate nickname serid and password to gnerrated one time
+        token
+      parameters:
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login_nickname_body'
+      responses:
+        "200":
+          description: User session validated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /session/2FA/accesscode:
+    get:
+      tags:
+      - session-2FA
+      summary: Generate Access Code
+      description: API To generate access code for a UserId
+      parameters:
+      - name: oneTimeToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    post:
+      tags:
+      - session-2FA
+      summary: Generate final Session Token
+      description: API to generate final session for user based on one time token
+      parameters:
+      - name: oneTimeToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2FA_accesscode_body'
+      responses:
+        "200":
+          description: User session validated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /session/2FA/biometric:
+    post:
+      tags:
+      - session-2FA
+      summary: Generate final Session Token
+      description: API to generate final session for user based on biometric
+      parameters:
+      - name: oneTimeToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2FA_biometric_body'
+      responses:
+        "200":
+          description: User session validated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /session/2FA/mpin:
+    post:
+      tags:
+      - session-2FA
+      summary: Generate final Session Token
+      description: API to generate final session for user based on mpin
+      parameters:
+      - name: oneTimeToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2FA_mpin_body'
+      responses:
+        "200":
+          description: User session validated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /session/2FA/oneTimeToken:
+    post:
+      tags:
+      - Session-2FA - TradeAPI
+      summary: Generate Final Session Token using One Time Token for Trade API subcribed
+        clients
+      description: API to generate final session token for user based on One time
+        token Generated using Login API
+      parameters:
+      - name: oneTimeToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/2FA_oneTimeToken_body'
+      responses:
+        "200":
+          description: User session validated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /session/logout:
+    delete:
+      tags:
+      - session-Login
+      summary: Invalidate Session Token
+      description: API to invalidate final session for user.
+      parameters:
+      - name: sessionToken
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+      - name: consumerKey
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ip
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: appId
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: userid
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: User session invalidated  successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+        "400":
+          description: Invalid or missing input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "429":
+          description: Too many requests to the API
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "503":
+          description: Trade API service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        "504":
+          description: "Gateway timeout, trade API is unreachable"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+      security:
+      - default: []
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+components:
+  schemas:
+    "2FA_biometric_body":
+      type: object
+      properties:
+        userid:
+          type: string
+          description: Userid for which  access code validation
+        biometric:
+          type: string
+          description: Biometric flag for login
+    inline_response_200_redirect:
+      type: object
+      properties:
+        host:
+          type: string
+          description: Redirect Host for API's.
+        keySize:
+          type: integer
+          description: Redirect Port for API's
+          format: int64
+      description: Redirect Host where API's are expected to get executed..
+      example:
+        keySize: 6
+        host: host
+    "2FA_accesscode_body":
+      type: object
+      properties:
+        userid:
+          type: string
+          description: Userid for which  access code validation
+        accessCode:
+          type: string
+          description: Login access code received on email and mobile no
+    inline_response_200_3_success_broadcast:
+      type: object
+      properties:
+        host:
+          type: string
+          description: Broadcast Host to connect.
+        port:
+          type: number
+          description: Broadcast Port.
+      example:
+        port: 6.027456183070403
+        host: host
+    login_userid_body:
+      type: object
+      properties:
+        userid:
+          type: string
+          description: Your KSEC userID
+          example: 1Y125
+        password:
+          type: string
+          description: Your KSEC password
+          example: abc@123
+    login_nickname_body:
+      type: object
+      properties:
+        nickname:
+          type: string
+          description: Your KSEC userID
+          example: 1Y125
+        password:
+          type: string
+          description: Your KSEC password
+          example: abc@123
+    "2FA_oneTimeToken_body":
+      type: object
+      properties:
+        userid:
+          type: string
+          description: Userid for which  access code validation
+    inline_response_200_3_success_redirect:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: number
+      example:
+        port: 5.962133916683182
+        host: host
+    inline_response_200_3_success_weblink:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: number
+      description: Weblink Url Host Port Deails.
+      example:
+        port: 7.061401241503109
+        host: host
+    inline_response_200_3_success_service:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: number
+      description: Service domain for Funds API.
+      example:
+        port: 2.3021358869347655
+        host: host
+    "2FA_mpin_body":
+      type: object
+      properties:
+        userid:
+          type: string
+          description: Userid for which  access code validation
+        mpin:
+          type: string
+          description: mpin for login
+    inline_response_200_3_success_apiToken_redirect:
+      type: object
+      properties:
+        host:
+          type: string
+          description: Redirect host where client login is exected to be done..
+        port:
+          type: number
+          description: Redirect Host Port.
+      example:
+        port: 0.8008281904610115
+        host: host
+    inline_response_200_1:
+      type: object
+      properties:
+        oneTimeToken:
+          type: string
+          description: one Time Token generated on successful authentication
+        mpin:
+          type: string
+          description: "Mpin eligibiity flag, Y for True and N for False"
+        biometric:
+          type: string
+          description: "Biometric eligibiity flag, Y for True and N for False"
+        message:
+          type: string
+          description: Confirmation message on login.
+      example:
+        mpin: mpin
+        message: message
+        oneTimeToken: oneTimeToken
+        biometric: biometric
+    inline_response_200_3_success:
+      type: object
+      properties:
+        apiToken:
+          $ref: '#/components/schemas/inline_response_200_3_success_apiToken'
+        broadcast:
+          $ref: '#/components/schemas/inline_response_200_3_success_broadcast'
+        clientCode:
+          type: string
+          description: Valid Client account of Login User.
+        clientName:
+          type: string
+          description: Name of the Login User.
+        emailId:
+          type: string
+          description: Email Id of the User.
+        enabledProducts:
+          type: array
+          items:
+            type: string
+        enabledSegments:
+          type: array
+          description: Enabled Segments for Trading.
+          items:
+            type: string
+        loginTime:
+          type: string
+          description: Login time of User.
+        marketData:
+          $ref: '#/components/schemas/inline_response_200_3_success_marketData'
+        phoneNo:
+          type: string
+          description: Registered contact details.
+        redirect:
+          $ref: '#/components/schemas/inline_response_200_3_success_redirect'
+        search:
+          $ref: '#/components/schemas/inline_response_200_3_success_search'
+        service:
+          $ref: '#/components/schemas/inline_response_200_3_success_service'
+        sessionToken:
+          type: string
+          description: Final Session Token .
+        stwtFlag:
+          type: string
+          description: STWT Disclamer Flag.
+        userId:
+          type: string
+          description: User Id of the user.
+        weblink:
+          $ref: '#/components/schemas/inline_response_200_3_success_weblink'
+      example:
+        broadcast:
+          port: 6.027456183070403
+          host: host
+        redirect:
+          port: 5.962133916683182
+          host: host
+        stwtFlag: stwtFlag
+        clientName: clientName
+        emailId: emailId
+        userId: userId
+        phoneNo: phoneNo
+        search:
+          port: 5.637376656633329
+          host: host
+        apiToken:
+          redirect:
+            port: 0.8008281904610115
+            host: host
+          sessionId: sessionId
+        loginTime: loginTime
+        clientCode: clientCode
+        marketData:
+          port: 1.4658129805029452
+          host: host
+        service:
+          port: 2.3021358869347655
+          host: host
+        sessionToken: sessionToken
+        weblink:
+          port: 7.061401241503109
+          host: host
+        enabledProducts:
+        - enabledProducts
+        - enabledProducts
+        enabledSegments:
+        - enabledSegments
+        - enabledSegments
+    inline_response_200:
+      type: object
+      properties:
+        encryption:
+          $ref: '#/components/schemas/inline_response_200_encryption'
+        redirect:
+          $ref: '#/components/schemas/inline_response_200_redirect'
+        weblink:
+          $ref: '#/components/schemas/inline_response_200_weblink'
+        message:
+          type: string
+          description: Response message from API...
+        userType:
+          type: string
+          description: "Type of User based G : Global, V : View Only, A : Admin, D\
+            \ : Dealer..."
+          enum:
+          - G
+          - V
+          - A
+          - D
+        status:
+          type: string
+          description: "Account status for a userid in system.In case of status apart\
+            \ from Active, redirection to weblink host is expected."
+          enum:
+          - Inactive
+          - Deactive
+          - Closed
+          - Active
+      example:
+        redirect:
+          keySize: 6
+          host: host
+        encryption:
+          publickKey: publickKey
+          keySize: 0
+          type: PLAIN
+        weblink:
+          keySize: 1
+          host: host
+        userType: G
+        message: message
+        status: Inactive
+    inline_response_200_2:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: ID of the user
+        clientCode:
+          type: string
+          description: Unique client code
+        clientName:
+          type: string
+          description: Full name of the client
+        emailId:
+          type: string
+          description: Email ID of the user
+        phoneNo:
+          type: integer
+          description: Registered phone number of the user
+          format: int32
+        enabledSegments:
+          type: array
+          description: "Enabled segments of the user - equity, currency etc"
+          items:
+            type: string
+        enabledProducts:
+          type: array
+          description: "Enabled products for the user - normal, supermultiple etc"
+          items:
+            type: string
+        sessionToken:
+          type: string
+          description: Access token required for trading calls
+        publicToken:
+          type: string
+          description: Public token required for broadcast session
+        loginTime:
+          type: integer
+          description: Login time of the user in epoch format
+          format: int64
+      example:
+        publicToken: publicToken
+        loginTime: 6
+        clientName: clientName
+        clientCode: clientCode
+        sessionToken: sessionToken
+        emailId: emailId
+        userId: userId
+        phoneNo: 0
+        enabledSegments:
+        - enabledSegments
+        - enabledSegments
+        enabledProducts:
+        - enabledProducts
+        - enabledProducts
+    inline_response_200_weblink:
+      type: object
+      properties:
+        host:
+          type: string
+          description: Weblink Host for API's.
+        keySize:
+          type: integer
+          description: Weblink Port for API's
+          format: int64
+      description: Weblink Host where Weblinnk based API/URL to get executed...
+      example:
+        keySize: 1
+        host: host
+    inline_response_200_3_success_apiToken:
+      type: object
+      properties:
+        redirect:
+          $ref: '#/components/schemas/inline_response_200_3_success_apiToken_redirect'
+        sessionId:
+          type: string
+          description: API token Session Id on Successful authenthetication of One
+            time Token.
+      example:
+        redirect:
+          port: 0.8008281904610115
+          host: host
+        sessionId: sessionId
+    inline_response_200_3_success_marketData:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: number
+      description: Market Data host and Port information.
+      example:
+        port: 1.4658129805029452
+        host: host
+    inline_response_200_3_success_search:
+      type: object
+      properties:
+        host:
+          type: string
+        port:
+          type: number
+      description: Serach Domain for Security Search.
+      example:
+        port: 5.637376656633329
+        host: host
+    inline_response_200_3:
+      type: object
+      properties:
+        success:
+          $ref: '#/components/schemas/inline_response_200_3_success'
+      example:
+        success:
+          broadcast:
+            port: 6.027456183070403
+            host: host
+          redirect:
+            port: 5.962133916683182
+            host: host
+          stwtFlag: stwtFlag
+          clientName: clientName
+          emailId: emailId
+          userId: userId
+          phoneNo: phoneNo
+          search:
+            port: 5.637376656633329
+            host: host
+          apiToken:
+            redirect:
+              port: 0.8008281904610115
+              host: host
+            sessionId: sessionId
+          loginTime: loginTime
+          clientCode: clientCode
+          marketData:
+            port: 1.4658129805029452
+            host: host
+          service:
+            port: 2.3021358869347655
+            host: host
+          sessionToken: sessionToken
+          weblink:
+            port: 7.061401241503109
+            host: host
+          enabledProducts:
+          - enabledProducts
+          - enabledProducts
+          enabledSegments:
+          - enabledSegments
+          - enabledSegments
+    inline_response_200_4:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Session Expiry confirmation message
+      example:
+        message: message
+    inline_response_200_encryption:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of Encryption.
+          enum:
+          - PLAIN
+          - BASE64
+          - RSA
+          - AES
+        publickKey:
+          type: string
+          description: "Key Applicable in case of RSA,AES."
+        keySize:
+          type: integer
+          description: Applicable Key size of type of Encryption.
+          format: int64
+      description: "Encryption method of sesitive data such as passwrd, AcccessCode,\
+        \ MPIN etc."
+      example:
+        publickKey: publickKey
+        keySize: 0
+        type: PLAIN
+    inline_response_400:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: error code
+          format: int32
+        message:
+          type: string
+          description: error message
+        description:
+          type: string
+          description: error description
+  securitySchemes:
+    default:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://tradeapi.kotaksecurities.com/authorize
+          scopes: {}
