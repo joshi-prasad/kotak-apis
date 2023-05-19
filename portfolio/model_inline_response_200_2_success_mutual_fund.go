@@ -9,8 +9,8 @@
 package portfolio
 
 type InlineResponse2002SuccessMutualFund struct {
-	Debt *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"debt,omitempty"`
+	Debt   *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"debt,omitempty"`
 	Equity *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"equity,omitempty"`
 	Hybrid *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"hybrid,omitempty"`
-	Total *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"total,omitempty"`
+	Total  *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"total,omitempty"`
 }

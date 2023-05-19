@@ -11,5 +11,5 @@ package portfolio
 type InlineResponse2002SuccessDarivatives struct {
 	Futures float64 `json:"futures,omitempty"`
 	Options float64 `json:"options,omitempty"`
-	Total float64 `json:"total,omitempty"`
+	Total   float64 `json:"total,omitempty"`
 }

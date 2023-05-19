@@ -1,4 +1,3 @@
-
 /*
  * Brokerage-API
  *
@@ -15,6 +14,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
 	"github.com/antihax/optional"
 )
 
@@ -24,19 +24,20 @@ var (
 )
 
 type DefaultApiService service
+
 /*
 DefaultApiService
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param ksSesToken base64(&#x27;{\&quot;clientId\&quot;:\&quot;your-clientId\&quot;,\&quot;sessionToken\&quot;:\&quot;your-sessionToken\&quot;,\&quot;sourceConsumerKey\&quot;:\&quot;your-sourceConsumerKey\&quot;}&#x27;)
  * @param optional nil or *DefaultApiGetBrokerageChargesDetailsPostOpts - Optional Parameters:
-     * @param "Body" (optional.Interface of GetBrokerageChargesDetailsBody) - 
-     * @param "Userparams" (optional.String) - 
+     * @param "Body" (optional.Interface of GetBrokerageChargesDetailsBody) -
+     * @param "Userparams" (optional.String) -
 
 */
 
 type DefaultApiGetBrokerageChargesDetailsPostOpts struct {
-    Body optional.Interface
-    Userparams optional.String
+	Body       optional.Interface
+	Userparams optional.String
 }
 
 func (a *DefaultApiService) GetBrokerageChargesDetailsPost(ctx context.Context, ksSesToken string, localVarOptionals *DefaultApiGetBrokerageChargesDetailsPostOpts) (*http.Response, error) {
@@ -45,7 +46,6 @@ func (a *DefaultApiService) GetBrokerageChargesDetailsPost(ctx context.Context, 
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		
 	)
 
 	// create path and map variables
@@ -78,8 +78,8 @@ func (a *DefaultApiService) GetBrokerageChargesDetailsPost(ctx context.Context, 
 	localVarHeaderParams["ks_ses_token"] = parameterToString(ksSesToken, "")
 	// body params
 	if localVarOptionals != nil && localVarOptionals.Body.IsSet() {
-		
-		localVarOptionalBody:= localVarOptionals.Body.Value()
+
+		localVarOptionalBody := localVarOptionals.Body.Value()
 		localVarPostBody = &localVarOptionalBody
 	}
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
@@ -98,10 +98,9 @@ func (a *DefaultApiService) GetBrokerageChargesDetailsPost(ctx context.Context, 
 		return localVarHttpResponse, err
 	}
 
-
 	if localVarHttpResponse.StatusCode >= 300 {
 		newErr := GenericSwaggerError{
-			body: localVarBody,
+			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
 		return localVarHttpResponse, newErr

@@ -11,10 +11,10 @@ package portfolio
 type PriceforupdateScripwiseBody struct {
 	InstrumentToken string `json:"instrumentToken,omitempty"`
 	// edit dateformat(dd/mm/yyyy)
-	Date string `json:"date,omitempty"`
+	Date     string  `json:"date,omitempty"`
 	Quantity float64 `json:"quantity,omitempty"`
-	Price float64 `json:"price,omitempty"`
-	// B/S for BUY / SELL 
-	OrderType string `json:"orderType,omitempty"`
+	Price    float64 `json:"price,omitempty"`
+	// B/S for BUY / SELL
+	OrderType         string `json:"orderType,omitempty"`
 	TypeOfTransaction string `json:"typeOfTransaction,omitempty"`
 }

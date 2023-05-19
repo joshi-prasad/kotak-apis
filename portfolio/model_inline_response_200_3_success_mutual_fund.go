@@ -9,11 +9,11 @@
 package portfolio
 
 type InlineResponse2003SuccessMutualFund struct {
-	Debt *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"debt,omitempty"`
-	Equity *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"equity,omitempty"`
-	Hybrid *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"hybrid,omitempty"`
-	Total *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"total,omitempty"`
-	DebtDetails []InlineResponse2003SuccessDebenturesDetails `json:"debtDetails,omitempty"`
-	HybridDetails []InlineResponse2003SuccessDebenturesDetails `json:"hybridDetails,omitempty"`
-	EquityDetails []InlineResponse2003SuccessDebenturesDetails `json:"equityDetails,omitempty"`
+	Debt          *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"debt,omitempty"`
+	Equity        *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"equity,omitempty"`
+	Hybrid        *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"hybrid,omitempty"`
+	Total         *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"total,omitempty"`
+	DebtDetails   []InlineResponse2003SuccessDebenturesDetails               `json:"debtDetails,omitempty"`
+	HybridDetails []InlineResponse2003SuccessDebenturesDetails               `json:"hybridDetails,omitempty"`
+	EquityDetails []InlineResponse2003SuccessDebenturesDetails               `json:"equityDetails,omitempty"`
 }

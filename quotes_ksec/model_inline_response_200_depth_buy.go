@@ -9,7 +9,7 @@
 package quotes_ksec
 
 type InlineResponse200DepthBuy struct {
-	Price float32 `json:"price,omitempty"`
-	Quantity int32 `json:"quantity,omitempty"`
-	Orders int32 `json:"orders,omitempty"`
+	Price    float32 `json:"price,omitempty"`
+	Quantity int32   `json:"quantity,omitempty"`
+	Orders   int32   `json:"orders,omitempty"`
 }

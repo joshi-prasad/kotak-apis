@@ -10,10 +10,10 @@ package quotes_ksec
 
 type InlineResponse2001 struct {
 	// Name of the instrument
-	InstrumentName string `json:"instrumentName,omitempty"`
-	InstrumentToken int32 `json:"instrumentToken,omitempty"`
-	Open float32 `json:"open,omitempty"`
-	High float32 `json:"high,omitempty"`
-	Low float32 `json:"low,omitempty"`
-	Close float32 `json:"close,omitempty"`
+	InstrumentName  string  `json:"instrumentName,omitempty"`
+	InstrumentToken int32   `json:"instrumentToken,omitempty"`
+	Open            float32 `json:"open,omitempty"`
+	High            float32 `json:"high,omitempty"`
+	Low             float32 `json:"low,omitempty"`
+	Close           float32 `json:"close,omitempty"`
 }

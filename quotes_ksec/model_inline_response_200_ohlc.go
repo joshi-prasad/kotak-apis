@@ -9,8 +9,8 @@
 package quotes_ksec
 
 type InlineResponse200Ohlc struct {
-	Open float32 `json:"open,omitempty"`
-	High float32 `json:"high,omitempty"`
-	Low float32 `json:"low,omitempty"`
+	Open  float32 `json:"open,omitempty"`
+	High  float32 `json:"high,omitempty"`
+	Low   float32 `json:"low,omitempty"`
 	Close float32 `json:"close,omitempty"`
 }

@@ -10,5 +10,5 @@ package scriptmaster
 
 type InlineResponse200Success struct {
 	Cash string `json:"cash,omitempty"`
-	Fno string `json:"fno,omitempty"`
+	Fno  string `json:"fno,omitempty"`
 }

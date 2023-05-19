@@ -9,9 +9,9 @@
 package portfolio
 
 type InlineResponse2003SuccessDarivatives struct {
-	Futures float64 `json:"futures,omitempty"`
-	Options float64 `json:"options,omitempty"`
-	Total float64 `json:"total,omitempty"`
+	Futures        float64                                              `json:"futures,omitempty"`
+	Options        float64                                              `json:"options,omitempty"`
+	Total          float64                                              `json:"total,omitempty"`
 	FuturesDetails []InlineResponse2003SuccessDarivativesFuturesDetails `json:"futuresDetails,omitempty"`
 	OptionsDetails []InlineResponse2003SuccessDarivativesFuturesDetails `json:"optionsDetails,omitempty"`
 }

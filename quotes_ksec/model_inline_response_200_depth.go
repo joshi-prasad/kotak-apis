@@ -9,6 +9,6 @@
 package quotes_ksec
 
 type InlineResponse200Depth struct {
-	Buy *InlineResponse200DepthBuy `json:"buy,omitempty"`
+	Buy  *InlineResponse200DepthBuy `json:"buy,omitempty"`
 	Sell *InlineResponse200DepthBuy `json:"sell,omitempty"`
 }

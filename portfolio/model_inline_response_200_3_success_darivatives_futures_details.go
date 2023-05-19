@@ -9,9 +9,9 @@
 package portfolio
 
 type InlineResponse2003SuccessDarivativesFuturesDetails struct {
-	ScripName string `json:"scripName,omitempty"`
-	ExpiryDate string `json:"expiryDate,omitempty"`
-	DervType string `json:"dervType,omitempty"`
+	ScripName   string  `json:"scripName,omitempty"`
+	ExpiryDate  string  `json:"expiryDate,omitempty"`
+	DervType    string  `json:"dervType,omitempty"`
 	StrikePrice float64 `json:"strikePrice,omitempty"`
-	Rpl float64 `json:"rpl,omitempty"`
+	Rpl         float64 `json:"rpl,omitempty"`
 }

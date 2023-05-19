@@ -9,15 +9,15 @@
 package portfolio
 
 type InlineResponse2003SuccessDebenturesDetails struct {
-	GainLoss *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"gainLoss,omitempty"`
-	BuyRate float64 `json:"buyRate,omitempty"`
-	CloseDate string `json:"closeDate,omitempty"`
-	CostBasis float64 `json:"costBasis,omitempty"`
-	CpLtcgl float64 `json:"cpLtcgl,omitempty"`
-	Fmv float64 `json:"fmv,omitempty"`
-	OpenDate string `json:"openDate,omitempty"`
-	Proceeds float64 `json:"proceeds,omitempty"`
-	Quantity float64 `json:"quantity,omitempty"`
-	SellRate float64 `json:"sellRate,omitempty"`
-	ShortName string `json:"shortName,omitempty"`
+	GainLoss  *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"gainLoss,omitempty"`
+	BuyRate   float64                                                    `json:"buyRate,omitempty"`
+	CloseDate string                                                     `json:"closeDate,omitempty"`
+	CostBasis float64                                                    `json:"costBasis,omitempty"`
+	CpLtcgl   float64                                                    `json:"cpLtcgl,omitempty"`
+	Fmv       float64                                                    `json:"fmv,omitempty"`
+	OpenDate  string                                                     `json:"openDate,omitempty"`
+	Proceeds  float64                                                    `json:"proceeds,omitempty"`
+	Quantity  float64                                                    `json:"quantity,omitempty"`
+	SellRate  float64                                                    `json:"sellRate,omitempty"`
+	ShortName string                                                     `json:"shortName,omitempty"`
 }

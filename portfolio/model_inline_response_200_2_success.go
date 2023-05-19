@@ -9,9 +9,9 @@
 package portfolio
 
 type InlineResponse2002Success struct {
-	Debentures *InlineResponse2002SuccessDebentures `json:"debentures,omitempty"`
-	ETF *InlineResponse2002SuccessDebentures `json:"ETF,omitempty"`
-	Equity *InlineResponse2002SuccessDebentures `json:"equity,omitempty"`
+	Debentures  *InlineResponse2002SuccessDebentures  `json:"debentures,omitempty"`
+	ETF         *InlineResponse2002SuccessDebentures  `json:"ETF,omitempty"`
+	Equity      *InlineResponse2002SuccessDebentures  `json:"equity,omitempty"`
 	Darivatives *InlineResponse2002SuccessDarivatives `json:"darivatives,omitempty"`
-	MutualFund *InlineResponse2002SuccessMutualFund `json:"mutualFund,omitempty"`
+	MutualFund  *InlineResponse2002SuccessMutualFund  `json:"mutualFund,omitempty"`
 }

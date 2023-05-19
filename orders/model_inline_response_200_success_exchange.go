@@ -9,8 +9,8 @@
 package orders
 
 type InlineResponse200SuccessExchange struct {
-	Message string `json:"message,omitempty"`
-	OrderId float64 `json:"orderId,omitempty"`
-	Price float64 `json:"price,omitempty"`
+	Message  string  `json:"message,omitempty"`
+	OrderId  float64 `json:"orderId,omitempty"`
+	Price    float64 `json:"price,omitempty"`
 	Quantity float64 `json:"quantity,omitempty"`
 }

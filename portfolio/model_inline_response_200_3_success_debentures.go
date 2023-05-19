@@ -9,10 +9,10 @@
 package portfolio
 
 type InlineResponse2003SuccessDebentures struct {
-	MarketTransactionTotal *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"marketTransactionTotal,omitempty"`
+	MarketTransactionTotal              *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"marketTransactionTotal,omitempty"`
 	OffMarketTransferInwardOutwardTotal *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"offMarketTransferInwardOutwardTotal,omitempty"`
-	OffMarketTransferOutwardTotal *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"offMarketTransferOutwardTotal,omitempty"`
-	OffMarketsTransferInwardTotal *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"offMarketsTransferInwardTotal,omitempty"`
-	Total *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"total,omitempty"`
-	Details []InlineResponse2003SuccessDebenturesDetails `json:"details,omitempty"`
+	OffMarketTransferOutwardTotal       *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"offMarketTransferOutwardTotal,omitempty"`
+	OffMarketsTransferInwardTotal       *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"offMarketsTransferInwardTotal,omitempty"`
+	Total                               *InlineResponse2002SuccessDebenturesMarketTransactionTotal `json:"total,omitempty"`
+	Details                             []InlineResponse2003SuccessDebenturesDetails               `json:"details,omitempty"`
 }

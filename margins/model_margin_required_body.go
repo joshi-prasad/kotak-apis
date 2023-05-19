@@ -10,6 +10,6 @@ package margins
 
 type MarginRequiredBody struct {
 	// Transaction Type - BUY or SELL
-	TransactionType string `json:"transactionType,omitempty"`
-	OrderInfo []OrderInfo `json:"orderInfo,omitempty"`
+	TransactionType string      `json:"transactionType,omitempty"`
+	OrderInfo       []OrderInfo `json:"orderInfo,omitempty"`
 }

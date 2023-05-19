@@ -9,9 +9,9 @@
 package portfolio
 
 type PnlSchema struct {
-	Equity []PnlEquity `json:"equity,omitempty"`
+	Equity     []PnlEquity     `json:"equity,omitempty"`
 	Mutualfund []PnlMutualfund `json:"mutualfund,omitempty"`
 	Derivative []PnlDerivative `json:"derivative,omitempty"`
-	Currency []PnlCurrency `json:"currency,omitempty"`
-	Commodity []PnlCommodity `json:"commodity,omitempty"`
+	Currency   []PnlCurrency   `json:"currency,omitempty"`
+	Commodity  []PnlCommodity  `json:"commodity,omitempty"`
 }

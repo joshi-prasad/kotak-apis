@@ -11,8 +11,8 @@ package portfolio
 type FromDateToDateBody struct {
 	InstrumentToken string `json:"instrumentToken,omitempty"`
 	// edit dateformat(dd/mm/yyyy)
-	Date string `json:"date,omitempty"`
-	Quantity float64 `json:"quantity,omitempty"`
-	Price float64 `json:"price,omitempty"`
-	TypeOfTransaction string `json:"typeOfTransaction,omitempty"`
+	Date              string  `json:"date,omitempty"`
+	Quantity          float64 `json:"quantity,omitempty"`
+	Price             float64 `json:"price,omitempty"`
+	TypeOfTransaction string  `json:"typeOfTransaction,omitempty"`
 }

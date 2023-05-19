@@ -9,7 +9,7 @@
 package portfolio
 
 type InlineResponse2002SuccessDebenturesMarketTransactionTotal struct {
-	IntraDay float64 `json:"intraDay,omitempty"`
-	LongTerm float64 `json:"longTerm,omitempty"`
+	IntraDay  float64 `json:"intraDay,omitempty"`
+	LongTerm  float64 `json:"longTerm,omitempty"`
 	ShortTerm float64 `json:"shortTerm,omitempty"`
 }

@@ -10,8 +10,8 @@ package quotes_ksec
 
 type InlineResponse200 struct {
 	// Name of the instrument
-	InstrumentName string `json:"instrumentName,omitempty"`
-	InstrumentToken int32 `json:"instrumentToken,omitempty"`
+	InstrumentName  string `json:"instrumentName,omitempty"`
+	InstrumentToken int32  `json:"instrumentToken,omitempty"`
 	// Last time in epoch format when this data was updated
 	LastUpdatedTime int64 `json:"lastUpdatedTime,omitempty"`
 	// Last time in epoch format when this scrip was traded
@@ -33,7 +33,7 @@ type InlineResponse200 struct {
 	// Lower value of daily price range
 	DprLow float32 `json:"dprLow,omitempty"`
 	// Higher value of daily price range
-	DprHigh float32 `json:"dprHigh,omitempty"`
-	Ohlc *InlineResponse200Ohlc `json:"ohlc,omitempty"`
-	Depth *InlineResponse200Depth `json:"depth,omitempty"`
+	DprHigh float32                 `json:"dprHigh,omitempty"`
+	Ohlc    *InlineResponse200Ohlc  `json:"ohlc,omitempty"`
+	Depth   *InlineResponse200Depth `json:"depth,omitempty"`
 }
